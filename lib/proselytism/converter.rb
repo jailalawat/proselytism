@@ -24,13 +24,11 @@ module Proselytism
 
       #call perform logging duration and potential errors
       def convert(file_path, options={})
-        log :debug, "#{self.class.name} converted #{file_path} to :#{options[:to]}" do
-          begin
-            perform(file_path, options)
-          rescue Error => e
-            log :error, "#{e.class.name} #{e.message}\n#{e.backtrace}\n"
-            raise e
-          end
+        begin
+          perform(file_path, options)
+        rescue Error => e
+          log :error, "#{e.class.name} #{e.message}\n#{e.backtrace}\n"
+          raise e
         end
       end
 

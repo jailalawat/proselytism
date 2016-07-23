@@ -12,7 +12,16 @@ module Proselytism
   class Config
 
     def initialize
-      @options ||= {}
+      @options ||= {
+        open_office_path: "soffice",
+        oo_server_bridge: "JOD",
+        oo_server_max_cpu: 95,  #percent
+        oo_server_max_cpu_delay: 2, #seconds
+        oo_server_availability_delay: 6, # seconds
+        oo_server_start_delay: 2, #seconds
+        oo_conversion_max_tries: 2,
+        oo_conversion_max_time: 4 #seconds
+      }
     end
 
     def method_missing(method=nil, value=nil, &block)
