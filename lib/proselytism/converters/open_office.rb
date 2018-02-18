@@ -21,7 +21,8 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
   # Converts documents
   def perform(origin, options={})
     destination = destination_file_path(origin, options)
-    command = "#{Proselytism::Converters::OpenOffice}::Bridges::#{config.oo_server_bridge}".constantize.command + " '#{origin}' '#{destination}' 2>&1"
+    # command = "#{Proselytism::Converters::OpenOffice}::Bridges::#{config.oo_server_bridge}".constantize.command + " '#{origin}' '#{destination}' 2>&1"
+    command ="/usr/bin/soffice --headless '-env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}' --convert-to pdf:writer_pdf_Export --outdir '#{Rails.root}/public/PDf_convert' '#{origin}'"
     server.perform { execute(command) }
     destination
   end
